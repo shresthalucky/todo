@@ -1,16 +1,14 @@
 import React from 'react';
 import Note from '../../components/Note/Note';
 
-class List extends React.Component {
-
-  // constructor(props) {
-  //   super(props);
-  // }
+class DoneList extends React.Component {
 
   render() {
+    const doneList = this.props.list.filter(e => !e.active);
+
     return (
       <div>
-        {this.props.list.map(note => {
+        {doneList.map(note => {
           return <Note detail={note} key={note.id} actions={this.props.actions} />
         })}
       </div>
@@ -18,4 +16,4 @@ class List extends React.Component {
   }
 }
 
-export default List;
+export default DoneList;

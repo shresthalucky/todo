@@ -1,25 +1,28 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+
 import Navbar from './components/Navbar/Navbar';
 import Form from './components/Form/Form';
-import List from './containers/List/List';
+import ActiveList from './containers/Lists/ActiveList';
+import DoneList from './containers/Lists/DoneList';
 
 class App extends React.Component {
 
   constructor() {
     super();
-    this.navStatus = ['active', 'done', 'archive'];
+    this.navStatus = ['active', 'done'];
     this.state = {
       'todoLists': [],
     }
 
     this.actionHandlers = {
       handleActive: (id) => this.handleActions('active', id),
-      handleArchive: (id) => this.handleActions('archive', id),
       handleDelete: (id) => this.handleActions('delete', id)
     }
   }
 
   handleActions = (action, id) => {
+
     const note = this.state.todoLists.filter(e => {
       if (e.id === id) {
         if (action === 'delete') return false;
@@ -42,13 +45,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Router>
         <Navbar status={this.navStatus} />
         <main>
-          <Form submitHandler={this.handleAddToList} />
-          <List list={this.state.todoLists} actions={this.actionHandlers} />
+          <Switch>
+
+            <Route exact path="/" render={() => <Redirect to="/active" />} />
+
+            <Route exact path="/active">
+              <Form submitHandler={this.handleAddToList} />
+              <ActiveList list={this.state.todoLists} actions={this.actionHandlers} />
+            </Route>
+
+            <Route exact path="/done">
+              <DoneList list={this.state.todoLists} actions={this.actionHandlers} />
+            </Route>
+
+          </Switch>
         </main>
-      </div>
+      </Router>
     )
   }
 }

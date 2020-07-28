@@ -20,9 +20,7 @@ class Form extends React.Component {
     this.props.submitHandler({
       ...this.state,
       'id': Date.now(),
-      'active': true,
-      'done': false,
-      'archive': false
+      'active': true
     });
   }
 

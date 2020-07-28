@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import Form from './components/Form/Form';
@@ -8,9 +8,18 @@ import DoneList from './containers/Lists/DoneList';
 
 class App extends React.Component {
 
-  constructor() {
-    super();
-    this.navStatus = ['active', 'done'];
+  constructor(props) {
+    super(props);
+    
+    this.navs = {
+      'active': {
+        'path': '/active'
+      },
+      'done': {
+        'path': '/done'
+      }
+    };
+
     this.state = {
       'todoLists': [],
     }
@@ -19,6 +28,7 @@ class App extends React.Component {
       handleActive: (id) => this.handleActions('active', id),
       handleDelete: (id) => this.handleActions('delete', id)
     }
+
   }
 
   handleActions = (action, id) => {
@@ -45,25 +55,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <Navbar status={this.navStatus} />
+      <div>
+        <Navbar items={this.navs} />
         <main>
           <Switch>
 
-            <Route exact path="/" render={() => <Redirect to="/active" />} />
+            <Route exact path="/" render={() => <Redirect to={this.navs.active.path} />} />
 
-            <Route exact path="/active">
+            <Route exact path={this.navs.active.path}>
               <Form submitHandler={this.handleAddToList} />
               <ActiveList list={this.state.todoLists} actions={this.actionHandlers} />
             </Route>
 
-            <Route exact path="/done">
+            <Route exact path={this.navs.done.path}>
               <DoneList list={this.state.todoLists} actions={this.actionHandlers} />
             </Route>
 
           </Switch>
         </main>
-      </Router>
+      </div>
     )
   }
 }

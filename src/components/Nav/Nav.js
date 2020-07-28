@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Nav(props) {
+function Nav({ title, path }) {
   return (
     <li>
-      <Link to={'/' + props.title}>
-        {props.title}
-      </Link>
+      <Link to={path}>{title}</Link>
     </li>
   )
 }

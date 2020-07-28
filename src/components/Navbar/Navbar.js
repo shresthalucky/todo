@@ -3,12 +3,12 @@ import React from 'react';
 import Nav from '../Nav/Nav';
 
 function Navbar(props) {
-  
-  return(
+
+  return (
     <nav>
       <ul>
-        {props.status.map((status, i) => {
-          return <Nav title={status} key={i} />
+        {Object.keys(props.items).map((nav) => {
+          return <Nav title={nav} path={props.items[nav].path} key={nav} />
         })}
       </ul>
     </nav>

@@ -1,0 +1,17 @@
+@import "./partials/config";
+@import "./partials/mixins";
+
+@import "../containers/Lists/List.scss";
+@import "../components/Nav/Nav.scss";
+@import "../components/Form/Form.scss";
+@import "../components/Navbar/Navbar.scss";
+@import "../components/Note/Note.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}

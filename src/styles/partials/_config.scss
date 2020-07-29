@@ -1,0 +1,17 @@
+// fonts
+$font-family-fallback: 'Arial', sans-serif;
+$font-family-primary: 'Source Sans Pro', $font-family-fallback;
+
+// colors
+$white: #FFFFFF;
+$dodger-blue: #2979FF;
+$mine-shaft: #212121;
+
+$primary-color: $dodger-blue;
+$color-text: $mine-shaft;
+
+//Breakpoints
+$sm-device: 540px;
+$md-device: 720px;
+$lg-device: 960px;
+$xl-device: 1400px;

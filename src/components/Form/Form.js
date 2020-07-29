@@ -17,11 +17,19 @@ class Form extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.submitHandler({
-      ...this.state,
-      'id': Date.now(),
-      'active': true
-    });
+
+    if (this.state.content) {
+      this.props.submitHandler({
+        ...this.state,
+        'id': Date.now(),
+        'active': true
+      });
+
+      this.setState({
+        ...this.state,
+        content: '',
+      })
+    }
   }
 
   render() {

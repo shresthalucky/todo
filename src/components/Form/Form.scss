@@ -1,0 +1,12 @@
+.form-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: none;
+  background-color: $white;
+  z-index: 10;
+
+  &.active {
+    display: block;
+  }
+}

@@ -1,11 +1,21 @@
 @import "./partials/config";
 @import "./partials/mixins";
+@import "./partials/helpers";
 
+@import "../components/Button/Button.scss";
 @import "../containers/Lists/List.scss";
+@import "../components/Header/Header.scss";
+@import "../containers/Bottom/Bottom.scss";
 @import "../components/Nav/Nav.scss";
 @import "../components/Form/Form.scss";
 @import "../components/Navbar/Navbar.scss";
-@import "../components/Note/Note.scss";
+@import "../components/Todo/Todo.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -13,5 +23,31 @@ body {
   font-family: $font-family-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
+}
+
+.clearfix {
+  &:after {
+    display: table;
+    content: '';
+    clear: both;
+  }
+}
+
+.container {
+  padding: 0 15px;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @include mq(md) {
+    max-width: $md-device;
+  }
+
+  @include mq(lg) {
+    max-width: $lg-device;
+  }
+
+  @include mq(xl) {
+    max-width: $xl-device;
+    padding: 0 200px;
+  }
 }

@@ -1,0 +1,16 @@
+.nav-link {
+  display: inline-block;
+  margin: 0 20px;
+  text-transform: uppercase;
+
+  a {
+    @extend .bold-title;
+
+    color: $color-text-light;
+    text-decoration: none;
+
+    &.active {
+      color: $color-text;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.todo {
+  padding: 12px 20px;
+  border-radius: 10px;
+  
+  &:hover {
+    background-color: lighten($primary-color, 40%);
+  }
+}
+
+.todo-contents {
+  float: left;
+  width: calc(100% - 100px);
+
+  .title {
+
+  }
+
+  .description {
+    color: $color-text-light;
+  }
+}
+
+.todo-actions {
+  float: right;
+  width: 100px;
+  text-align: right;
+
+  .btn-icon {
+    &:hover {
+      background-color: $white;
+    }
+  }
+}

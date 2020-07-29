@@ -1,5 +1,5 @@
 import React from 'react';
-import Note from '../../components/Note/Note';
+import Todo from '../../components/Todo/Todo';
 
 class DoneList extends React.Component {
 
@@ -8,8 +8,8 @@ class DoneList extends React.Component {
 
     return (
       <div>
-        {doneList.map(note => {
-          return <Note detail={note} key={note.id} actions={this.props.actions} />
+        {doneList.map(todo => {
+          return <Todo todo={todo} key={todo.id} actions={this.props.actions} />
         })}
       </div>
     )

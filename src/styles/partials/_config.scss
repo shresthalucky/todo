@@ -1,14 +1,22 @@
 // fonts
 $font-family-fallback: 'Arial', sans-serif;
 $font-family-primary: 'Source Sans Pro', $font-family-fallback;
+$default-font-size: 16px;
+
+$heading-1: $default-font-size + 10px;
+$heading-2: $default-font-size + 6px;
+$heading-3: $default-font-size + 2px;
+$heading-4: $default-font-size;
 
 // colors
 $white: #FFFFFF;
+$light-white: #efefef;
 $dodger-blue: #2979FF;
 $mine-shaft: #212121;
 
 $primary-color: $dodger-blue;
 $color-text: $mine-shaft;
+$color-text-light: lighten($color-text, 50%);
 
 //Breakpoints
 $sm-device: 540px;

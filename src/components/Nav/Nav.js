@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Nav({ title, path }) {
   return (
-    <li>
-      <Link to={path}>{title}</Link>
+    <li className="nav-link">
+      <NavLink to={path}>{title}</NavLink>
     </li>
   )
 }

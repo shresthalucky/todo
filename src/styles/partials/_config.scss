@@ -15,6 +15,7 @@ $dodger-blue: #2979FF;
 $mine-shaft: #212121;
 
 $primary-color: $dodger-blue;
+$primary-color-light: lighten($primary-color, 10%);
 $color-text: $mine-shaft;
 $color-text-light: lighten($color-text, 50%);
 

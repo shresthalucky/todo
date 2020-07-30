@@ -6,6 +6,7 @@ import Form from '../../components/Form/Form';
 import ActiveList from '../Lists/ActiveList';
 import DoneList from '../Lists/DoneList';
 import Bottom from '../Bottom/Bottom';
+import Input from '../../components/Input/Input';
 
 class Main extends React.Component {
 
@@ -56,6 +57,7 @@ class Main extends React.Component {
 
     this.state = {
       todoList: JSON.parse(localStorage.getItem('todoList')) || [...this.randomTodos],
+      searchText: '',
       displayFormHandler: () => { },
     }
 
@@ -99,7 +101,18 @@ class Main extends React.Component {
     }, this.updateLocalStorage)
   }
 
+  handleSearch = (e) => {
+    this.setState({
+      searchText: e.target.value
+    })
+  }
+
   render() {
+
+    const todoList = this.state.todoList.filter(todo =>
+      todo.title.toLowerCase().includes(this.state.searchText.toLowerCase())
+    );
+
     return (
       <>
         <Form submitHandler={this.handleAddToList} ref={this.formElement} />
@@ -110,16 +123,19 @@ class Main extends React.Component {
 
           <main>
             <div className="container">
+
+              <Input changeHandler={this.handleSearch} value={this.state.searchText} className="search" placeholder="Search" />
+
               <Switch>
 
                 <Route exact path="/" render={() => <Redirect to={this.navs.active.path} />} />
 
                 <Route exact path={this.navs.active.path}>
-                  <ActiveList list={this.state.todoList} actions={this.actionHandlers} />
+                  <ActiveList list={todoList} actions={this.actionHandlers} />
                 </Route>
 
                 <Route exact path={this.navs.done.path}>
-                  <DoneList list={this.state.todoList} actions={this.actionHandlers} />
+                  <DoneList list={todoList} actions={this.actionHandlers} />
                 </Route>
 
               </Switch>

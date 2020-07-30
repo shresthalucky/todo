@@ -1,0 +1,18 @@
+.input {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid $light-white;
+  border-radius: 10px;
+  font-size: $default-font-size;
+  background-color: $light-white;
+
+  &:focus {
+    outline: 0;
+    border: 1px solid $primary-color-light;
+    background-color: $white;
+  }
+
+  &.search {
+    margin: 20px 0;
+  }
+}

@@ -6,7 +6,6 @@ import Form from '../../components/Form/Form';
 import AllList from '../Lists/AllList';
 import ActiveList from '../Lists/ActiveList';
 import DoneList from '../Lists/DoneList';
-import Bottom from '../Bottom/Bottom';
 import Input from '../../components/Input/Input';
 
 class Main extends React.Component {
@@ -69,14 +68,6 @@ class Main extends React.Component {
       handleActive: (id) => this.handleActions('active', id),
       handleDelete: (id) => this.handleActions('delete', id)
     }
-
-    this.formElement = React.createRef();
-  }
-
-  componentDidMount() {
-    this.setState({
-      displayFormHandler: this.formElement.current.toggleDisplay,
-    })
   }
 
   updateLocalStorage = () => {
@@ -99,7 +90,6 @@ class Main extends React.Component {
   }
 
   handleAddToList = (todo) => {
-    console.log(todo);
     this.setState({
       todoList: [todo, ...this.state.todoList],
     }, this.updateLocalStorage)
@@ -119,8 +109,6 @@ class Main extends React.Component {
 
     return (
       <>
-        <Form submitHandler={this.handleAddToList} ref={this.formElement} />
-
         <div className="main-wrapper">
 
           <Header navs={this.navs} />
@@ -136,6 +124,8 @@ class Main extends React.Component {
                 placeholder="Search"
                 inputTag="input"
               />
+
+              <Form submitHandler={this.handleAddToList} />
 
               <Switch>
 
@@ -154,8 +144,6 @@ class Main extends React.Component {
               </Switch>
             </div>
           </main>
-
-          <Bottom displayFormHandler={this.state.displayFormHandler} />
         </div>
       </>
     )

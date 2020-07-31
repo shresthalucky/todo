@@ -6,3 +6,19 @@
     text-align: center;
   }
 }
+
+.nav-link {
+  display: inline-block;
+  margin: 0 20px;
+  text-transform: uppercase;
+
+  a {
+    font-weight: 700;
+    color: $text-color-light;
+    text-decoration: none;
+
+    &.active {
+      color: $text-color;
+    }
+  }
+}

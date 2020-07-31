@@ -8,17 +8,19 @@ function Todo({ todo, actions }) {
   const handleTodoActive = () => actions.handleActive(todo.id);
   const handleTodoDelete = () => actions.handleDelete(todo.id);
 
+  const iconColor = todo.active ? 'green' : 'blue';
+
   return (
     <div className="todo clearfix">
-      <div className="todo-contents">
+      <div className={`todo-contents ${!todo.active && 'fade'}`}>
         <h3 className="title">{todo.title}</h3>
         <p className="description">{todo.description}</p>
       </div>
       <div className="todo-actions">
-        <Button clickHandler={handleTodoActive} group="icon">
+        <Button clickHandler={handleTodoActive} group={`icon secondary ${iconColor}`}>
           {todo.active ? <RiCheckLine /> : <RiCloseLine />}
         </Button>
-        <Button clickHandler={handleTodoDelete} group="icon">
+        <Button clickHandler={handleTodoDelete} group="icon secondary red">
           <RiDeleteBinLine />
         </Button>
       </div>

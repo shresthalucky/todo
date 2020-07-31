@@ -7,7 +7,7 @@ class ActiveList extends React.Component {
     const activeList = this.props.list.filter(e => e.active);
 
     return (
-      <div>
+      <div className="list">
         {activeList.map(todo => {
           return <Todo todo={todo} key={todo.id} actions={this.props.actions} />
         })}

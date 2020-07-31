@@ -16,10 +16,20 @@
   &:first-child {
     margin-left: 0;
   }
-}
 
-.btn-primary {
-  background-color: $primary-color;
+  &.primary {
+    background-color: $primary-color;
+    color: $white;
+  }
+
+  &.primary:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &.secondary {
+    background-color: $light-white;
+    color: $primary-color;
+  }
 }
 
 .btn-icon {
@@ -28,6 +38,21 @@
   height: 40px;
   width: 40px;
   line-height: 0.5;
-  background-color: $light-white;
   color: $primary-color;
+
+  &:hover {
+    background-color: $white;
+  }
+
+  &.blue {
+    color: $primary-color;
+  }
+
+  &.green {
+    color: $color-done;
+  }
+
+  &.red {
+    color: $color-delete;
+  }
 }

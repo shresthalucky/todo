@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Nav from '../Nav/Nav';
+import { NavLink } from 'react-router-dom';
 
 function Navbar(props) {
 
@@ -9,13 +8,16 @@ function Navbar(props) {
       <div className="container">
         <ul>
           {Object.keys(props.items).map((nav) => {
-            return <Nav title={nav} path={props.items[nav].path} key={nav} />
+            return (
+              <li className="nav-link" key={nav}>
+                <NavLink exact to={props.items[nav].path}>{nav}</NavLink>
+              </li>
+            )
           })}
         </ul>
       </div>
     </nav>
   )
-
 }
 
 export default Navbar;

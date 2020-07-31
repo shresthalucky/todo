@@ -7,7 +7,7 @@ class DoneList extends React.Component {
     const doneList = this.props.list.filter(e => !e.active);
 
     return (
-      <div>
+      <div className="list">
         {doneList.map(todo => {
           return <Todo todo={todo} key={todo.id} actions={this.props.actions} />
         })}

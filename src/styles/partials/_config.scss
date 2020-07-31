@@ -13,11 +13,16 @@ $white: #FFFFFF;
 $light-white: #efefef;
 $dodger-blue: #2979FF;
 $mine-shaft: #212121;
+$apple: #43A047;
+$cinnabar: #E53935;
 
 $primary-color: $dodger-blue;
 $primary-color-light: lighten($primary-color, 10%);
-$color-text: $mine-shaft;
-$color-text-light: lighten($color-text, 50%);
+$text-color: $mine-shaft;
+$text-color-light: lighten($text-color, 50%);
+$text-color-extra-light: lighten($text-color, 70%);
+$color-done: $apple;
+$color-delete: $cinnabar;
 
 //Breakpoints
 $sm-device: 540px;

@@ -5,7 +5,7 @@ class AllList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="list">
         {this.props.list.map(todo => {
           return <Todo todo={todo} key={todo.id} actions={this.props.actions} />
         })}

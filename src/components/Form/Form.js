@@ -1,7 +1,8 @@
 import React from 'react';
-
+import { RiArrowUpSLine, RiArrowDownSLine, RiAddLine } from 'react-icons/ri';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
+
 
 class Form extends React.Component {
 
@@ -12,13 +13,13 @@ class Form extends React.Component {
         title: '',
         description: ''
       },
-      display: false
+      isDescription: false
     }
   }
 
-  toggleDisplay = () => {
+  toggleDescription = () => {
     this.setState({
-      display: !this.state.display
+      isDescription: !this.state.isDescription
     });
   }
 
@@ -42,7 +43,6 @@ class Form extends React.Component {
 
     if (this.state.todo.title) {
       this.props.submitHandler(todo);
-      this.toggleDisplay();
       this.resetTodo();
     }
   }
@@ -56,39 +56,43 @@ class Form extends React.Component {
     });
   }
 
-  handleCancel = (e) => {
-    e.preventDefault();
-    this.resetTodo();
-    this.toggleDisplay();
-  }
-
   render() {
     return (
-      <div className={`form-wrapper ${this.state.display ? 'active' : ''}`}>
-        <div className="container">
-          <form onSubmit={this.handleSubmit}>
+      <div className="form-wrapper">
+        <form>
+          <div className="title-wrapper clearfix">
+            <div className="title-input">
+              <Input
+                name="title"
+                changeHandler={this.handleInputChange}
+                value={this.state.todo.title}
+                className="form"
+                placeholder="Title"
+                inputTag="input"
+              />
+            </div>
 
-            <Input
-              name="title"
-              changeHandler={this.handleInputChange}
-              value={this.state.todo.title}
-              className="form"
-              inputTag="input"
-              label="Title" />
+            <div className="form-actions">
+              <Button group="icon secondary" type="button" clickHandler={this.toggleDescription}>
+                {this.state.isDescription ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+              </Button>
+              <Button group="icon primary" type="submit" clickHandler={this.handleSubmit}>
+                <RiAddLine />
+              </Button>
+            </div>
+          </div>
 
+          <div className={`description-wrapper ${this.state.isDescription ? 'active' : ''}`} >
             <Input
               name="description"
               changeHandler={this.handleInputChange}
               value={this.state.todo.description}
               className="form"
+              placeholder="Description"
               inputTag="textarea"
-              label="Description"
             />
-
-            <Button type="submit" group="primary">Add</Button>
-            <Button type="reset" clickHandler={this.handleCancel} group="primary">Cancel</Button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     )
   }

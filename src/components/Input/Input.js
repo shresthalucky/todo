@@ -1,29 +1,27 @@
 import React from 'react';
 
-function Input({ name, changeHandler, value, className, placeholder, label, inputTag }) {
+function Input({ name, changeHandler, value, className, placeholder, inputTag }) {
 
   let inputElement;
 
   switch (inputTag) {
     case 'input':
       inputElement =
-        placeholder ?
-          <input
-            name={name}
-            type="text"
-            onChange={changeHandler} value={value}
-            placeholder={placeholder} />
-          :
-          <input name={name}
-            type="text"
-            onChange={changeHandler}
-            value={value} />
+        <input
+          name={name}
+          type="text"
+          onChange={changeHandler} value={value}
+          placeholder={placeholder}
+        />
       break;
 
     case 'textarea':
-      inputElement = <textarea
-        name={name}
-        onChange={changeHandler} value={value} />
+      inputElement =
+        <textarea
+          name={name}
+          onChange={changeHandler} value={value}
+          placeholder={placeholder}
+        />
       break;
 
     default:
@@ -31,7 +29,6 @@ function Input({ name, changeHandler, value, className, placeholder, label, inpu
 
   return (
     <div className={`input ${className}`}>
-      {label && <label>{label}</label>}
       {inputElement}
     </div>
   )

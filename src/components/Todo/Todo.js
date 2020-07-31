@@ -15,10 +15,10 @@ function Todo({ todo, actions }) {
         <p className="description">{todo.description}</p>
       </div>
       <div className="todo-actions">
-        <Button clickHandler={handleTodoActive} type="icon">
+        <Button clickHandler={handleTodoActive} group="icon">
           {todo.active ? <RiCheckLine /> : <RiCloseLine />}
         </Button>
-        <Button clickHandler={handleTodoDelete} type="icon">
+        <Button clickHandler={handleTodoDelete} group="icon">
           <RiDeleteBinLine />
         </Button>
       </div>

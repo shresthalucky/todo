@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Form from '../../components/Form/Form';
+import AllList from '../Lists/AllList';
 import ActiveList from '../Lists/ActiveList';
 import DoneList from '../Lists/DoneList';
 import Bottom from '../Bottom/Bottom';
@@ -14,10 +15,13 @@ class Main extends React.Component {
     super(props);
 
     this.navs = {
-      'active': {
+      all: {
+        'path': '/'
+      },
+      active: {
         'path': '/active'
       },
-      'done': {
+      done: {
         'path': '/done'
       }
     };
@@ -124,11 +128,20 @@ class Main extends React.Component {
           <main>
             <div className="container">
 
-              <Input changeHandler={this.handleSearch} value={this.state.searchText} className="search" placeholder="Search" />
+              <Input
+                name="search"
+                changeHandler={this.handleSearch}
+                value={this.state.searchText}
+                className="search"
+                placeholder="Search"
+                inputTag="input"
+              />
 
               <Switch>
 
-                <Route exact path="/" render={() => <Redirect to={this.navs.active.path} />} />
+                <Route exact path={this.navs.all.path}>
+                  <AllList list={todoList} actions={this.actionHandlers} />
+                </Route>
 
                 <Route exact path={this.navs.active.path}>
                   <ActiveList list={todoList} actions={this.actionHandlers} />

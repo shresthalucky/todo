@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '../Button/Button';
+import Input from '../Input/Input';
 
 class Form extends React.Component {
 
@@ -42,25 +43,52 @@ class Form extends React.Component {
     if (this.state.todo.title) {
       this.props.submitHandler(todo);
       this.toggleDisplay();
+      this.resetTodo();
     }
+  }
+
+  resetTodo = () => {
+    this.setState({
+      todo: {
+        title: '',
+        description: ''
+      }
+    });
+  }
+
+  handleCancel = (e) => {
+    e.preventDefault();
+    this.resetTodo();
+    this.toggleDisplay();
   }
 
   render() {
     return (
       <div className={`form-wrapper ${this.state.display ? 'active' : ''}`}>
-        <form onSubmit={this.handleSubmit}>
-          <label>Title</label>
-          <div>
-            <input type="text" name="title" value={this.state.todo.title} onChange={this.handleInputChange} />
-          </div>
+        <div className="container">
+          <form onSubmit={this.handleSubmit}>
 
-          <label>Description</label>
-          <div>
-            <textarea name="description" value={this.state.todo.description} onChange={this.handleInputChange} />
-          </div>
-          <Button type="primary">Add</Button>
-          <Button clickHandler={this.toggleDisplay} type="primary">Cancel</Button>
-        </form>
+            <Input
+              name="title"
+              changeHandler={this.handleInputChange}
+              value={this.state.todo.title}
+              className="form"
+              inputTag="input"
+              label="Title" />
+
+            <Input
+              name="description"
+              changeHandler={this.handleInputChange}
+              value={this.state.todo.description}
+              className="form"
+              inputTag="textarea"
+              label="Description"
+            />
+
+            <Button type="submit" group="primary">Add</Button>
+            <Button type="reset" clickHandler={this.handleCancel} group="primary">Cancel</Button>
+          </form>
+        </div>
       </div>
     )
   }

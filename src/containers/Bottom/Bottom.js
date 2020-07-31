@@ -7,7 +7,7 @@ function Bottom(props) {
   return(
     <div className="bottom-layout">
       <div className="container">
-        <Button clickHandler={props.displayFormHandler} type="primary">Add New Todo</Button>
+        <Button clickHandler={props.displayFormHandler} group="primary">Add New Todo</Button>
       </div>
     </div>
   )

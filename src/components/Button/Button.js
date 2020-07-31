@@ -1,10 +1,11 @@
 import React from 'react';
 
-function Button({ clickHandler, type, ...rest }) {
+function Button({ clickHandler, type, group, ...rest }) {
 
-  return (
-    <button className={`btn btn-${type}`} onClick={clickHandler}>{rest.children}</button>
-  )
+  const btnElement = type ? <button type={type} className={`btn btn-${group}`} onClick={clickHandler}>{rest.children}</button>
+    : <button className={`btn btn-${group}`} onClick={clickHandler}>{rest.children}</button>
+
+  return btnElement;
 }
 
 export default Button;

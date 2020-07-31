@@ -1,18 +1,44 @@
 .input {
-  width: 100%;
-  padding: 10px 20px;
-  border: 1px solid $light-white;
-  border-radius: 10px;
-  font-size: $default-font-size;
-  background-color: $light-white;
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid $light-white;
+    border-radius: 10px;
+    font-size: $default-font-size;
+    background-color: $light-white;
 
-  &:focus {
-    outline: 0;
-    border: 1px solid $primary-color-light;
-    background-color: $white;
+    &:focus {
+      outline: 0;
+      border: 1px solid $primary-color-light;
+      background-color: $white;
+    }
+
   }
-
+  
   &.search {
     margin: 20px 0;
+  }
+
+  label {
+    font-weight: 700;
+  }
+}
+
+.form {
+
+  &.input {
+    margin: 20px 0;
+  }
+
+  input, textarea {
+    margin-top: 10px;
+  }
+
+  textarea {
+    max-width: 100%;
+    min-width: 100%;
+    font-family: $font-family-primary;
+    font-size: $default-font-size;
   }
 }

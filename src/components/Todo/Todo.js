@@ -3,10 +3,10 @@ import { RiDeleteBinLine, RiCheckLine, RiCloseLine } from 'react-icons/ri';
 
 import Button from '../Button/Button';
 
-function Todo({ todo, actions }) {
+function Todo({ todo, handleActive, handleDelete }) {
 
-  const handleTodoActive = () => actions.handleActive(todo.id);
-  const handleTodoDelete = () => actions.handleDelete(todo.id);
+  const handleTodoActive = () => handleActive(todo.id);
+  const handleTodoDelete = () => handleDelete(todo.id);
 
   const iconColor = todo.active ? 'green' : 'blue';
 

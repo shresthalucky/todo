@@ -1,153 +1,71 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from "react";
 
-import Header from '../../components/Header/Header';
-import Form from '../../components/Form/Form';
-import AllList from '../Lists/AllList';
-import ActiveList from '../Lists/ActiveList';
-import DoneList from '../Lists/DoneList';
-import Input from '../../components/Input/Input';
+import Routes from "../../routes";
+import { ROUTES } from "../../constants";
+import Form from "../../components/Form/Form";
+import Input from "../../components/Input/Input";
+import Header from "../../components/Header/Header";
 
-class Main extends React.Component {
+const Main = () => {
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todoList")) || []
+  );
+  const [searchText, setSearchText] = useState("");
 
-  constructor(props) {
-    super(props);
+  const updateLocalStorage = useCallback(() => {
+    localStorage.setItem("todoList", JSON.stringify(todos));
+  }, [todos]);
 
-    this.navs = {
-      all: {
-        'path': '/'
-      },
-      active: {
-        'path': '/active'
-      },
-      done: {
-        'path': '/done'
-      }
-    };
-
-    this.randomTodos = [
-      {
-        active: true,
-        description: "Suspendisse potenti nullam ac tortor vitae purus faucibus ornare.",
-        id: 1,
-        title: "Lorem ipsum dolor sit amet"
-      },
-      {
-        active: true,
-        description: "Potenti nullam ac tortor vitae purus faucibus ornare.",
-        id: 2,
-        title: "Lorem ipsum dolor sit amet"
-      },
-      {
-        active: true,
-        description: "Suspendisse potenti nullam ac tortor vitae purus faucibus ornare.",
-        id: 3,
-        title: "Lorem ipsum dolor sit amet"
-      },
-      {
-        active: true,
-        description: "Suspendisse potenti nullam ac tortor vitae purus faucibus ornare.",
-        id: 4,
-        title: "Lorem ipsum dolor sit amet"
-      },
-      {
-        active: false,
-        description: "Hurray! I already did this todo.",
-        id: 5,
-        title: "Hurray! I already did this todo."
-      }
-    ]
-
-    this.state = {
-      todoList: JSON.parse(localStorage.getItem('todoList')) || [...this.randomTodos],
-      searchText: '',
-      displayFormHandler: () => { },
-    }
-
-    this.actionHandlers = {
-      handleActive: (id) => this.handleActions('active', id),
-      handleDelete: (id) => this.handleActions('delete', id)
-    }
-  }
-
-  updateLocalStorage = () => {
-    localStorage.setItem('todoList', JSON.stringify(this.state.todoList));
-  }
-
-  handleActions = (action, id) => {
-
-    const todo = this.state.todoList.filter(e => {
-      if (e.id === id) {
-        if (action === 'delete') return false;
-        e[action] = !e[action];
-      };
-      return true;
-    });
-
-    this.setState({
-      todoList: todo
-    }, this.updateLocalStorage);
-  }
-
-  handleAddToList = (todo) => {
-    this.setState({
-      todoList: [todo, ...this.state.todoList],
-    }, this.updateLocalStorage)
-  }
-
-  handleSearch = (e) => {
-    this.setState({
-      searchText: e.target.value
-    })
-  }
-
-  render() {
-
-    const todoList = this.state.todoList.filter(todo =>
-      todo.title.toLowerCase().includes(this.state.searchText.toLowerCase())
+  const toggleActive = useCallback((id) => {
+    setTodos((todos) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, active: !todo.active } : todo
+      )
     );
+  }, []);
 
-    return (
-      <>
-        <div className="main-wrapper">
+  const deleteTodo = useCallback((id) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
 
-          <Header navs={this.navs} />
+  const handleSearchText = useCallback((event) => {
+    setSearchText(event.target.value);
+  }, []);
 
-          <main>
-            <div className="container">
+  const addTodo = useCallback((todo) => {
+    setTodos((todos) => [todo, ...todos]);
+  }, []);
 
-              <Input
-                name="search"
-                changeHandler={this.handleSearch}
-                value={this.state.searchText}
-                className="search"
-                placeholder="Search"
-                inputTag="input"
-              />
+  useEffect(updateLocalStorage, [updateLocalStorage]);
 
-              <Form submitHandler={this.handleAddToList} />
+  const todoList = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchText.toLowerCase())
+  );
 
-              <Switch>
+  return (
+    <div className="main-wrapper">
+      <Header navs={ROUTES} />
 
-                <Route exact path={this.navs.all.path}>
-                  <AllList list={todoList} actions={this.actionHandlers} />
-                </Route>
-
-                <Route exact path={this.navs.active.path}>
-                  <ActiveList list={todoList} actions={this.actionHandlers} />
-                </Route>
-
-                <Route exact path={this.navs.done.path}>
-                  <DoneList list={todoList} actions={this.actionHandlers} />
-                </Route>
-
-              </Switch>
-            </div>
-          </main>
+      <main>
+        <div className="container">
+          <Input
+            name="search"
+            changeHandler={handleSearchText}
+            value={searchText}
+            className="search"
+            placeholder="Search"
+            inputTag="input"
+          />
+          <Form submitHandler={addTodo} />
+          <Routes
+            todos={todoList}
+            toggleActive={toggleActive}
+            deleteTodo={deleteTodo}
+          />
         </div>
-      </>
-    )
-  }
-}
+      </main>
+    </div>
+  );
+};
 
 export default Main;

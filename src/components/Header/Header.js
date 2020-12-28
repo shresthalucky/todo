@@ -8,7 +8,8 @@ function Header(props) {
       <div className="page-heading">Todo List</div>
       <Navbar items={props.navs} />
     </header>
-  )
+  );
 }
 
 export default Header;
+
